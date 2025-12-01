@@ -1,144 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proboth | Developer Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Proboth | Developer Portfolio</title>
 
-<!-- Tailwind CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- AOS Animation -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-<style>
-body { cursor: none; }
+  <style>
+    /* hide default cursor */
+    body { cursor: none; }
 
-/* Custom Cursor */
-.cursor {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  background: rgba(0,255,150,.8);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%,-50%);
-  z-index: 9999;
-  animation: pulse 1.5s infinite;
-}
-@keyframes pulse {
-  0% {transform: scale(1);}
-  50% {transform: scale(1.5);opacity:.4;}
-  100% {transform: scale(1);}
-}
+    /* custom cursor */
+    .cursor {
+      position: fixed;
+      width: 18px;
+      height: 18px;
+      background: rgba(0,255,150,0.9);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: width .12s ease, height .12s ease, background-color .12s;
+      box-shadow: 0 0 12px rgba(0,255,150,0.12);
+    }
+    .cursor.big { width: 40px; height: 40px; background: rgba(0,255,150,0.18); }
 
-/* Glow Cards */
-.glow-card {
-  background: linear-gradient(145deg, #0f172a, #020617);
-  box-shadow: 0 0 25px rgba(0,255,255,0.2);
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-}
+    /* glow / glass card */
+    .glow-card {
+      background: linear-gradient(145deg, rgba(10,12,20,0.95), rgba(5,8,12,0.95));
+      border: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 30px rgba(14,165,233,0.03);
+      backdrop-filter: blur(6px);
+    }
 
-/* Typewriter */
-.typewriter {
-  overflow: hidden;
-  border-right: 2px solid white;
-  white-space: nowrap;
-  animation: typing 4s steps(40) 1 normal both, blink .75s infinite;
-}
-@keyframes typing { from {width:0} to {width:100%} }
-@keyframes blink { 50% {border-color: transparent;} }
-</style>
+    /* typewriter */
+    .typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid rgba(255,255,255,0.9);
+      animation: typing 3.6s steps(40) 0.8s 1 normal both, blink .75s step-end infinite;
+      display:inline-block;
+    }
+    @keyframes typing { from { width: 0 } to { width: 100% } }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    /* small bump animation for hero heading */
+    @keyframes bumpUpDown {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
+    .bump-text { animation: bumpUpDown 2.5s ease-in-out infinite; }
+
+    /* fade-in helper */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeIn { animation: fadeIn .9s ease-out both; }
+  </style>
 </head>
+<body class="bg-gray-950 text-white antialiased">
 
-<body class="bg-gray-950 text-white overflow-x-hidden">
+  <!-- Custom Cursor -->
+  <div class="cursor" id="customCursor"></div>
 
-<!-- Cursor -->
-<div class="cursor"></div>
+  <!-- HERO -->
+  <header class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- animated blobs -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute w-[520px] h-[520px] bg-cyan-500/20 rounded-full blur-3xl -top-40 -left-44"></div>
+      <div class="absolute w-[480px] h-[480px] bg-purple-500/18 rounded-full blur-3xl bottom-8 right-6"></div>
+    </div>
 
-<!-- HERO -->
-<header class="relative min-h-screen flex items-center justify-center">
+    <div class="relative z-10 text-center px-6 max-w-3xl" data-aos="fade-up">
+      <!-- profile image -->
+      <div class="mx-auto mb-6 w-36 h-36 md:w-40 md:h-40 rounded-full border-4 border-cyan-400 overflow-hidden">
+        <img src="src/images/profile.png" alt="Proboth profile" class="w-full h-full object-cover">
+      </div>
 
-<!-- Animated Background -->
-<div class="absolute inset-0 overflow-hidden">
-  <div class="absolute w-[500px] h-[500px] bg-cyan-500/20 blur-3xl rounded-full -top-40 -left-40"></div>
-  <div class="absolute w-[500px] h-[500px] bg-purple-500/20 blur-3xl rounded-full bottom-0 right-0"></div>
-</div>
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-4 bump-text">Hi, I’m Proboth</h1>
 
-<!-- Hero Content -->
-<div class="relative z-10 text-center px-6" data-aos="fade-up">
-  <div class="mx-auto mb-6 w-32 h-32 rounded-full border-4 border-cyan-400 overflow-hidden">
-    <img src="src/images/profile.png" class="w-full h-full object-cover">
-  </div>
+      <div class="typewriter text-lg md:text-2xl mx-auto max-w-2xl">
+        Wordpress Developer • Full-Stack Developer • Tailwind Fan
+      </div>
 
-  <h1 class="text-4xl md:text-6xl font-extrabold glow-text mb-4">Hi, I’m Proboth</h1>
+      <p class="text-gray-400 mt-6 max-w-2xl mx-auto">
+        I build performant, responsive, and beautiful websites — from WordPress themes to modern single-page apps.
+      </p>
 
-  <div class="typewriter mx-auto text-xl md:text-2xl">
-    Wordpress & Full-Stack Developer
-  </div>
+      <div class="mt-8 flex items-center justify-center gap-4">
+        <a href="#projects" class="px-6 py-3 rounded-full bg-cyan-500 hover:bg-cyan-600 transition shadow">View Work</a>
 
-  <p class="text-gray-400 mt-6 max-w-xl mx-auto">
-    I build fast, secure and powerful websites with modern technologies.
-  </p>
-
-  <div class="mt-8 space-x-4">
-    <a href="#projects" class="px-6 py-3 rounded-full bg-cyan-500 hover:bg-cyan-600 transition">View Work</a>
-    <a href="src/files/resume@proboth.pdf" target="_blank" class="px-6 py-3 rounded-full border border-cyan-400 hover:bg-cyan-400 hover:text-black transition">Resume</a>
-  </div>
-</div>
-</header>
-
-<!-- PROJECTS -->
-<section id="projects" class="py-20 px-6 bg-gray-900">
-  <h2 class="text-4xl font-bold text-center mb-12 text-cyan-400" data-aos="fade-up">Projects</h2>
-
-  <div class="grid md:grid-cols-3 gap-8">
-
-    <!-- Project -->
-    <div data-aos="zoom-in" class="glow-card rounded-lg overflow-hidden">
-      <img src="src/images/coralresidences.png" class="w-full h-44 object-cover">
-      <div class="p-6">
-        <h3 class="text-xl font-bold mb-2">Coral Residences</h3>
-        <a href="https://coralresidences.com" target="_blank" class="text-cyan-400">Visit →</a>
+        <!-- Use JS to trigger robust download -->
+        <button id="downloadResumeBtn" class="px-6 py-3 rounded-full border border-cyan-400 hover:bg-cyan-400 hover:text-black transition">Download Resume</button>
       </div>
     </div>
 
-    <div data-aos="zoom-in" class="glow-card rounded-lg overflow-hidden">
-      <img src="src/images/Ezytraveller.png" class="w-full h-44 object-cover">
-      <div class="p-6">
-        <h3 class="text-xl font-bold mb-2">Ezy Travellers</h3>
-        <a href="https://ezytravellers.com" target="_blank" class="text-cyan-400">Visit →</a>
+    <!-- floating badges -->
+    <div class="absolute top-6 left-6 w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg badge">HTML</div>
+    <div class="absolute top-8 left-1/2 -translate-x-1/2 w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center text-white shadow-lg badge">CSS</div>
+    <div class="absolute top-1/3 right-10 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg badge">JS</div>
+  </header>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="py-20 px-6 md:px-16 bg-gray-900">
+    <div class="max-w-[1200px] mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-8 text-cyan-400" data-aos="fade-up">Projects</h2>
+      <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+        A selection of recent work — click to visit live sites.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Coral Residences -->
+        <article data-aos="zoom-in" class="glow-card rounded-lg overflow-hidden">
+          <img src="src/images/coralresidences.png" alt="Coral Residences" class="w-full h-48 object-cover">
+          <div class="p-5">
+            <h3 class="text-xl font-semibold">The Coral Residences Maldives</h3>
+            <p class="text-gray-300 mt-2">Custom Hotel WordPress Theme</p>
+            <div class="mt-4">
+              <a href="https://coralresidences.com" target="_blank" rel="noopener" class="text-cyan-300">View →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Aura -->
+        <article data-aos="zoom-in" data-aos-delay="60" class="glow-card rounded-lg overflow-hidden">
+          <img src="src/images/Directflights.png" alt="Aura (DirectFlights image placeholder)" class="w-full h-48 object-cover">
+          <div class="p-5">
+            <h3 class="text-xl font-semibold">DirectFlights / Aura</h3>
+            <p class="text-gray-300 mt-2">Flight booking & travel site work</p>
+            <div class="mt-4">
+              <a href="https://directflights.net" target="_blank" rel="noopener" class="text-cyan-300">Visit →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ezytraveller -->
+        <article data-aos="zoom-in" data-aos-delay="120" class="glow-card rounded-lg overflow-hidden">
+          <img src="src/images/Ezytraveller.png" alt="Ezytraveller" class="w-full h-48 object-cover">
+          <div class="p-5">
+            <h3 class="text-xl font-semibold">Ezy Travellers</h3>
+            <p class="text-gray-300 mt-2">Travel website</p>
+            <div class="mt-4">
+              <a href="https://ezytravellers.com" target="_blank" rel="noopener" class="text-cyan-300">Visit →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Healthcare -->
+        <article data-aos="zoom-in" data-aos-delay="30" class="glow-card rounded-lg overflow-hidden">
+          <img src="src/images/Healthcare.png" alt="Ezy Healthcare" class="w-full h-48 object-cover">
+          <div class="p-5">
+            <h3 class="text-xl font-semibold">Ezy Healthcare</h3>
+            <p class="text-gray-300 mt-2">Medical tourism website</p>
+            <div class="mt-4">
+              <a href="https://ezyhealthcare.net" target="_blank" rel="noopener" class="text-cyan-300">Visit →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- DirectFlights (project card) -->
+        <article data-aos="zoom-in" data-aos-delay="90" class="glow-card rounded-lg overflow-hidden">
+          <img src="src/images/Directflights.png" alt="DirectFlights" class="w-full h-48 object-cover">
+          <div class="p-5">
+            <h3 class="text-xl font-semibold">DirectFlights</h3>
+            <p class="text-gray-300 mt-2">Travel & flight booking</p>
+            <div class="mt-4">
+              <a href="https://directflights.net" target="_blank" rel="noopener" class="text-cyan-300">Visit →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Autodirect -->
+        <article data-aos="zoom-in" data-aos-delay="150" class="glow-card rounded-lg overflow-hidden">
+          <img src="src/images/Autodirect.png" alt="Autodirect" class="w-full h-48 object-cover">
+          <div class="p-5">
+            <h3 class="text-xl font-semibold">Autodirect</h3>
+            <p class="text-gray-300 mt-2">Car marketplace</p>
+            <div class="mt-4">
+              <a href="https://autodirect.lk" target="_blank" rel="noopener" class="text-cyan-300">Visit →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Samartstaff -->
+        <article data-aos="zoom-in" data-aos-delay="180" class="glow-card rounded-lg overflow-hidden">
+          <img src="src/images/samartstaff.png" alt="Samartstaff" class="w-full h-48 object-cover">
+          <div class="p-5">
+            <h3 class="text-xl font-semibold">Samartstaff</h3>
+            <p class="text-gray-300 mt-2">HR / staffing platform work</p>
+            <div class="mt-4">
+              <a href="#" class="text-cyan-300">View →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Safinternational -->
+        <article data-aos="zoom-in" data-aos-delay="210" class="glow-card rounded-lg overflow-hidden">
+          <img src="src/images/Safinternational.png" alt="Safinternational" class="w-full h-48 object-cover">
+          <div class="p-5">
+            <h3 class="text-xl font-semibold">Safinternational</h3>
+            <p class="text-gray-300 mt-2">Corporate / travel software</p>
+            <div class="mt-4">
+              <a href="#" class="text-cyan-300">View →</a>
+            </div>
+          </div>
+        </article>
+
       </div>
     </div>
+  </section>
 
-    <div data-aos="zoom-in" class="glow-card rounded-lg overflow-hidden">
-      <img src="src/images/Autodirect.png" class="w-full h-44 object-cover">
-      <div class="p-6">
-        <h3 class="text-xl font-bold mb-2">AutoDirect</h3>
-        <a href="https://autodirect.lk" target="_blank" class="text-cyan-400">Visit →</a>
-      </div>
-    </div>
+  <!-- FOOTER -->
+  <footer class="bg-black text-gray-400 py-6 text-center">
+    © 2025 Proboth — All Rights Reserved
+  </footer>
 
-  </div>
-</section>
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true, anchorPlacement: 'top-bottom' });
+  </script>
 
-<!-- FOOTER -->
-<footer class="text-center p-6 bg-black text-gray-500">
-  © 2025 Proboth — All Rights Reserved
-</footer>
+  <script>
+    // Custom cursor movement and hover enlarging on interactive elements
+    const cursor = document.getElementById('customCursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
 
-<!-- Scripts -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init({duration:1200,once:true});</script>
+    // enlarge cursor on buttons and links
+    const interactive = document.querySelectorAll('a, button, .badge, .glow-card');
+    interactive.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+    });
+  </script>
 
-<script>
-const cursor = document.querySelector(".cursor");
-document.addEventListener("mousemove", e => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
-</script>
+  <script>
+    // Robust Resume Download
+    // This fetches the PDF and triggers a client-side download to avoid browser inconsistencies.
+    document.getElementById('downloadResumeBtn').addEventListener('click', async function () {
+      const fileUrl = 'src/files/resume@proboth.pdf'; // your file path
+      try {
+        // Fetch the file as blob
+        const resp = await fetch(fileUrl);
+        if (!resp.ok) throw new Error('Network response was not ok: ' + resp.status);
+        const blob = await resp.blob();
 
+        // Create a temporary link element to trigger download
+        const link = document.createElement('a');
+        const url = window.URL.createObjectURL(blob);
+
+        // Use a safer filename (browsers can block filenames with weird characters).
+        link.href = url;
+        link.download = 'Proboth_Resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+
+        // cleanup
+        setTimeout(() => {
+          window.URL.revokeObjectURL(url);
+          link.remove();
+        }, 3000);
+      } catch (err) {
+        console.error('Resume download failed:', err);
+        // fallback: open in new tab
+        window.open(fileUrl, '_blank', 'noopener');
+      }
+    });
+  </script>
 </body>
 </html>
